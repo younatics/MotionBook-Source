@@ -1,5 +1,4 @@
-# MotionBook Source
-#### Official MotionBook Source Code
+# Official MotionBook Source Code
 
 [![Platform](http://img.shields.io/badge/platform-ios-green.svg?style=flat
 )](https://developer.apple.com/iphone/index.action)
