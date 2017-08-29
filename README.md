@@ -9,7 +9,7 @@
 #### Welocome to MotionBook!
 - GitHub URL: https://github.com/younatics/MotionBook
 - App Store URL: https://appsto.re/kr/8yv1hb.i
-- FaceBook URL: https://www.facebook.com/MotionBookiOS/
+- Facebook URL: https://www.facebook.com/MotionBookiOS/
 
 Before start, MotionBook source is complicated and little bit messy. Please help us to develop this source much better than before! 
 MotionBook is open source based project. Because of that, I decided to open MotionBook source.
