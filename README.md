@@ -22,10 +22,10 @@ Hopes this repo help someone :)
 ## Contributing to MotionBook
 Contributions to MotionBook are welcomed and encouraged! Please see the [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
 
-I love code refactor or any other changes are welcomed. Please do not hesitate.
+We welcome code refactor or any other changes. Please do not hesitate.
 
-## Installation
-Installation is needed befor you started. please see the [Installation Guide](https://github.com/younatics/MotionBook-Source/wiki/Installation)
+## Getting Started
+Installation is needed befor you start. please see the [Installation Guide](https://github.com/younatics/MotionBook-Source/wiki/Installation)
 
 This process is not complicated(take under 10 minute). 
 
