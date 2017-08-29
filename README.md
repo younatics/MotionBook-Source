@@ -1,4 +1,4 @@
-# Official MotionBook Source Code
+# Official MotionBook Source Code 
 
 [![Platform](http://img.shields.io/badge/platform-ios-green.svg?style=flat
 )](https://developer.apple.com/iphone/index.action)
@@ -9,8 +9,10 @@
 #### I decided to open my [MotionBook](https://appsto.re/kr/8yv1hb.i) source. It is little bit messy :(
 #### Hopes this repo help someone :) 
 
-## Getting Started
+## [Wiki](https://github.com/younatics/MotionBook-Source/wiki)
+See more inforamtion about contributing, and source logic in Wiki
 
+## Getting Started
 ### 1. Submodule https://github.com/younatics/MotionBook.git
 `git submodule add https://github.com/younatics/MotionBook.git git/`
 
