@@ -17,6 +17,23 @@
 
 ### 2. Add Github Personal access token
 Github Personal settings -> Personal access tokens -> Generate new token
+Edit `user` and `token` in `NetworkManager.swift`
+
+```Swift
+class NetworkManager: NSObject {
+    let user = "younatics"
+    let token = "b908fde1073fb488eeee32b9213c0542b410876a"
+}
+```
 
 ### 3. Pod install
 `pod install`
+
+#### Done! You can now use MotionBook source!
+See more information in [Wiki](https://github.com/younatics/MotionBook-Source/wiki)
+
+## Author
+[younatics 🇰🇷](http://younatics.github.io)
+
+## License
+Highlighter is available under the MIT license. See the LICENSE file for more info.
