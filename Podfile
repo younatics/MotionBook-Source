@@ -27,7 +27,7 @@ def shared_pods
     pod 'Reveal-SDK', :configurations => ['Debug']
     pod 'PickColor'
     pod 'Presentation'
-    pod 'Hue', git: 'https://github.com/hyperoslo/Hue', branch: 'swift3'
+    pod 'Hue'
 
     # Lib Pods
     pod 'expanding-collection', '~> 1.0.3'

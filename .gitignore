@@ -1,5 +1,6 @@
 xcuserdata/
 Pods/
+*.lock
 .idea/
 fastlane/report.xml
 fastlane/Preview.html
