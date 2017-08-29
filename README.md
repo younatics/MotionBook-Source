@@ -13,4 +13,11 @@
 
 ## Getting Started
 
-### Submodule https://github.com/younatics/MotionBook.git
+### 1. Submodule https://github.com/younatics/MotionBook.git
+`git submodule add https://github.com/younatics/MotionBook.git git/`
+
+### 2. Add Github Personal access token
+Github Personal settings -> Personal access tokens -> Generate new token
+
+### 3. Pod install
+`pod install`
