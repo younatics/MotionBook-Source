@@ -33,6 +33,7 @@ extension JSON {
 
 class NetworkManager: NSObject {
     static let shared: NetworkManager = NetworkManager()
+    let user = "younatics"
     let token = "b908fde1073fb488eeee32b9213c0542b410876a"
     
     func deepLinkUrl(title:String, description:String, url: String, gitUrl: String, completion: @escaping (_ url: String?) -> Void) {
@@ -166,7 +167,6 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author, let title = gitArray[i].title {
                 let gitUrl = "\(author)/\(title)"
                 
-                let user = "younatics"
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]
@@ -213,7 +213,6 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author {
                 let userUrl = "\(author)"
                 
-                let user = "younatics"
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]
@@ -258,7 +257,6 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author, let title = gitArray[i].title {
                 let gitUrl = "\(author)/\(title)"
                 
-                let user = "younatics"
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]
