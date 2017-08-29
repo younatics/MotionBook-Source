@@ -9,8 +9,10 @@
 #### I decided to open my [MotionBook](https://appsto.re/kr/8yv1hb.i) source. It is little bit messy :(
 #### Hopes this repo help someone :) 
 
-## [Wiki](https://github.com/younatics/MotionBook-Source/wiki)
-See more inforamtion about contributing, and source logic in Wiki
+## Documentation
+- [Full documentaion](https://github.com/younatics/MotionBook-Source/wiki)
+- [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
+- [Installation](https://github.com/younatics/MotionBook-Source/wiki/Installation)
 
 ## Getting Started
 ### 1. Submodule https://github.com/younatics/MotionBook.git
