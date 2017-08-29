@@ -18,6 +18,7 @@ Hopes this repo help someone :)
 - [Full documentaion](https://github.com/younatics/MotionBook-Source/wiki)
 - [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
 - [Installation](https://github.com/younatics/MotionBook-Source/wiki/Installation)
+- [Basic Logic](https://github.com/younatics/MotionBook-Source/wiki/Basic-Logic)
 
 ## Contributing to MotionBook
 Contributions to MotionBook are welcomed and encouraged! Please see the [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
@@ -44,8 +45,24 @@ class NetworkManager: NSObject {
 ### 3. Pod install
 `pod install`
 
-#### Done! You can now use MotionBook source!
-See more information in [Wiki](https://github.com/younatics/MotionBook-Source/wiki)
+## Basic Logic
+
+#### 1. Get data from MotionBook README.md
+Get basic data and store in `RealmSwift`
+
+#### 2. Update latest data from GitHub Api
+Once a week, MotionBook will check date and update Github data(Stars, Issues, Forks) using GitHub Api.
+
+#### 3. Get Gif data using submodule
+Submodule https://github.com/younatics/MotionBook this repository and get gif data
+
+#### 4. Use On-Demand Resources for faster download speed
+[On-Demand Resources](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/index.html#//apple_ref/doc/uid/TP40015083-CH2-SW1) make faster download speed. 
+
+#### 5. Update Gif data to Realm
+Update Gif data to `Realm` and store.
+
+
 
 ## Author
 [younatics 🇰🇷](http://younatics.github.io)
