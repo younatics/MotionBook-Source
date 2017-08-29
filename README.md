@@ -32,8 +32,7 @@ Installation is needed befor you start. please see the [Installation Guide](http
 `git submodule add https://github.com/younatics/MotionBook.git git/`
 
 ### 2. Add Github Personal access token
-Github Personal settings -> Personal access tokens -> Generate new token
-Edit `user` and `token` in `NetworkManager.swift`
+Github Personal settings -> Personal access tokens -> Generate new token -> Edit `user` and `token` in `NetworkManager.swift`
 
 ```Swift
 class NetworkManager: NSObject {
