@@ -6,7 +6,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PAKBM2K9YU6QN)
 
-#### I decided to open my [MotionBook](https://appsto.re/kr/8yv1hb.i) source. It will be little bit messy :(
+#### I decided to open my [MotionBook](https://appsto.re/kr/8yv1hb.i) source. It is little bit messy :(
 #### Hopes this repo help someone :) 
 
 ## Getting Started
