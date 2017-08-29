@@ -36,4 +36,4 @@ See more information in [Wiki](https://github.com/younatics/MotionBook-Source/wi
 [younatics 🇰🇷](http://younatics.github.io)
 
 ## License
-Highlighter is available under the GNU General Public License v3.0 license. See the LICENSE file for more info.
+Highlighter is available under the GNU General Public License v3.0 license. See the [LICENSE](LICENSE) file for more info.
