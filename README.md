@@ -7,12 +7,14 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PAKBM2K9YU6QN)
 
 #### Welocome to MotionBook!
+- GitHub URL: https://github.com/younatics/MotionBook
+- App Store URL: https://appsto.re/kr/8yv1hb.i
+- FaceBook URL: https://www.facebook.com/MotionBookiOS/
+
 Before start, MotionBook source is complicated and little bit messy. Please help us to develop this source much better than before! 
-MotionBook is open source based project. Because of that, I decided to open [MotionBook](https://appsto.re/kr/8yv1hb.i) source.
+MotionBook is open source based project. Because of that, I decided to open MotionBook source.
 
 Hopes this repo help someone :)
-
-<a href="https://appsto.re/kr/8yv1hb.i" > <img src="https://raw.githubusercontent.com/younatics/MotionBook/master/Images/appstore.png" width="170" height="58"></a>
 
 ## Documentation
 - [Full documentaion](https://github.com/younatics/MotionBook-Source/wiki)
