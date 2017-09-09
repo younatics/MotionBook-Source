@@ -66,7 +66,7 @@ Update Gif data to `Realm` and store.
 
 
 ## Author
-[younatics 🇰🇷](http://younatics.github.io)
+[younatics 🇰🇷](https://twitter.com/younatics)
 
 ## License
 MotionBook-Source is available under the GNU General Public License v3.0 license. See the [LICENSE](LICENSE) file for more info.
