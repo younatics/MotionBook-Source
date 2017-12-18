@@ -1,8 +1,7 @@
 # Official MotionBook Source Code 
 
-[![Platform](http://img.shields.io/badge/platform-ios-green.svg?style=flat
-)](https://developer.apple.com/iphone/index.action)
-![Language](https://img.shields.io/badge/language-Swift-brightgreen.svg?style=flat)
+![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
+[![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PAKBM2K9YU6QN)
 
 #### Welocome to MotionBook!
@@ -11,7 +10,7 @@
 - Facebook URL: https://www.facebook.com/MotionBookiOS/
 
 Before start, MotionBook source is complicated and little bit messy. Please help us to develop this source much better than before! 
-MotionBook is open source based project. Because of that, I decided to open MotionBook source.
+MotionBook is an open source based project. Because of that, I decided to open MotionBook source.
 
 Hopes this repo help someone :)
 
@@ -29,21 +28,15 @@ We welcome code refactor or any other changes. Please do not hesitate.
 ## Getting Started
 Installation is needed befor you start. please see the [Installation Guide](https://github.com/younatics/MotionBook-Source/wiki/Installation)
 
-### 1. Submodule https://github.com/younatics/MotionBook.git
-`git submodule add https://github.com/younatics/MotionBook.git git/`
+### Add Github Personal access token and user Id in `Key.swift`
 
-### 2. Add Github Personal access token
-Github Personal settings -> Personal access tokens -> Generate new token -> Edit `user` and `token` in `NetworkManager.swift`
-
-```Swift
-class NetworkManager: NSObject {
-    let user = "younatics"
-    let token = "b908fde1073fb488eeee32b9213c0542b410876a"
+```Swift 
+enum Key: String {
+    case gitHubId = "younatics"
+    case githubToken = ""
+    case firbaseKey = ""
 }
 ```
-
-### 3. Pod install
-`pod install`
 
 ## Basic Logic
 
@@ -53,19 +46,15 @@ Get basic data and store in `RealmSwift`
 #### 2. Update latest data from GitHub Api
 Once a week, MotionBook will check date and update Github data(Stars, Issues, Forks) using GitHub Api.
 
-#### 3. Get Gif data using submodule
-Submodule https://github.com/younatics/MotionBook this repository and get gif data
-
-#### 4. Use On-Demand Resources for faster download speed
+#### 3. Use On-Demand Resources for faster download speed
 [On-Demand Resources](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/index.html#//apple_ref/doc/uid/TP40015083-CH2-SW1) make faster download speed. 
 
-#### 5. Update Gif data to Realm
+#### 4. Update Gif data to Realm
 Update Gif data to `Realm` and store.
 
-
-
 ## Author
-[younatics 🇰🇷](https://twitter.com/younatics)
+[younatics](https://twitter.com/younatics)
+<a href="http://twitter.com/younatics" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/follow/younatics.svg?style=social&label=Follow"></a>
 
 ## License
 MotionBook-Source is available under the Apache License 2.0. See the [LICENSE](LICENSE) file for more info.
