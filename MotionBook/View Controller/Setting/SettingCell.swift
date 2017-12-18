@@ -13,11 +13,12 @@ class SettingHeaderCell: UITableViewCell {
     static let ID = "SettingHeaderCell"
     
     var titleLabel: UILabel!
+    var bottomLine: UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(colorLiteralRed: 250/255, green: 250/255, blue: 250/255, alpha: 0.9)
+        self.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 0.9)
         
         let topLine = UIView()
         topLine.backgroundColor = UIColor(hexString: E1E4E8)
@@ -38,7 +39,7 @@ class SettingHeaderCell: UITableViewCell {
             m.bottom.equalTo(self).offset(-15)
         }
         
-        let bottomLine = UIView()
+        bottomLine = UIView()
         bottomLine.backgroundColor = UIColor(hexString: E1E4E8)
         self.addSubview(bottomLine)
         

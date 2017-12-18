@@ -66,6 +66,9 @@ open class YNSearchListView: UITableView, UITableViewDelegate, UITableViewDataSo
         self.searchResultDatabase = database
         self.reloadData()
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            self.startAnimatingVisibleCells()
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -78,13 +81,25 @@ open class YNSearchListView: UITableView, UITableViewDelegate, UITableViewDataSo
         }
         return false
     }
+    
+    func startAnimatingVisibleCells() {
+        if let visibleCells = self.visibleCells as? [SearchViewCell] {
+            for visibleCell in visibleCells {
+                visibleCell.isCell(needAnimating: true)
+            }
+        }
+    }
+    
+    // MARK: UIScrollViewDelegate
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        startAnimatingVisibleCells()
+    }
 
     // MARK: - UITableViewDelegate, UITableViewDataSource
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if !self.isFooterTableviewCell(indexPath: indexPath) {
             guard let cell = self.ynSearchListViewDelegate?.ynSearchListView(tableView, cellForRowAt: indexPath) as? SearchViewCell else { return }
-            cell.gifView.animatedImage = nil
-            
+            cell.isCell(needAnimating: false)
         }
     }
     
@@ -109,16 +124,16 @@ open class YNSearchListView: UITableView, UITableViewDelegate, UITableViewDataSo
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.3
         
-        let highlightStyle = [NSForegroundColorAttributeName: UIColor(hexString:MainColor)]
+        let highlightStyle = [NSAttributedStringKey.foregroundColor: UIColor(hexString:MainColor)]
         if !isCateogry {
-            Highlighter.highlight(object: cell.descriptionLabel, at: text, normal: [NSParagraphStyleAttributeName: paragraphStyle], highlight: [NSForegroundColorAttributeName: UIColor(hexString:MainColor), NSParagraphStyleAttributeName: paragraphStyle])
-            Highlighter.highlight(object: cell.authorLabel, at: text, normal: nil, highlight: highlightStyle)
-            Highlighter.highlight(object: cell.titleLabel, at: text, normal: nil, highlight: highlightStyle)
-            Highlighter.highlight(object: cell.dateLabel, at: text, normal: nil, highlight: highlightStyle)
-            Highlighter.highlight(object: cell.starLabel, at: text, normal: nil, highlight: highlightStyle)
-        }
-        Highlighter.highlight(object: cell.categoryLabel, at: text, normal: nil, highlight: highlightStyle)
+            cell.descriptionLabel.highlight(text: text, normal: [NSAttributedStringKey.paragraphStyle: paragraphStyle], highlight: [NSAttributedStringKey.foregroundColor: UIColor(hexString:MainColor), NSAttributedStringKey.paragraphStyle: paragraphStyle])
+            cell.authorLabel.highlight(text: text, normal: nil, highlight: highlightStyle)
+            cell.titleLabel.highlight(text: text, normal: nil, highlight: highlightStyle)
+            cell.dateLabel.highlight(text: text, normal: nil, highlight: highlightStyle)
+            cell.starLabel.highlight(text: text, normal: nil, highlight: highlightStyle)
 
+        }
+        cell.categoryLabel.highlight(text: text, normal: nil, highlight: highlightStyle)
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

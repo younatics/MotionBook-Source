@@ -11,8 +11,7 @@ class JTMaterialTransitionSecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(colorLiteralRed: 54.0 / 256.0, green: 70.0 / 256.0, blue: 93 / 256.0, alpha: 1.0)
-        
+        self.view.backgroundColor = UIColor(red: 54.0 / 256.0, green: 70.0 / 256.0, blue: 93 / 256.0, alpha: 1.0)
         createCloseButton()
     }
     
@@ -28,7 +27,7 @@ class JTMaterialTransitionSecondViewController: UIViewController {
         self.view.addSubview(closeButton)
     }
     
-    func didCloseButtonTouch () {
+    @objc func didCloseButtonTouch () {
         self.dismiss(animated: true, completion: nil)
     }
 

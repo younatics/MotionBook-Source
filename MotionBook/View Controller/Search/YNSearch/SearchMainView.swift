@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Device
 
 open class SearchMainView: UIView, UITextFieldDelegate {
     open var delegate: YNSearchDelegate? {
@@ -27,14 +28,14 @@ open class SearchMainView: UIView, UITextFieldDelegate {
     open var ynSerach = YNSearch()
     
     open func ynSearchinit() {
-        self.ynSearchTextfieldView = YNSearchTextFieldView(frame: CGRect(x: 0, y: 0, width: width, height: 64))
+        self.ynSearchTextfieldView = YNSearchTextFieldView(frame: CGRect(x: 0, y: 0, width: width, height: DynamicNavigationHeight))
         self.ynSearchTextfieldView.ynSearchTextField.delegate = self
         self.ynSearchTextfieldView.ynSearchTextField.addTarget(self, action: #selector(ynSearchTextfieldTextChanged(_:)), for: .editingChanged)
         self.ynSearchTextfieldView.cancelButton.addTarget(self, action: #selector(ynSearchTextfieldcancelButtonClicked), for: .touchUpInside)
         self.ynSearchTextfieldView.textEraseButton.addTarget(self, action: #selector(ynSearchTextfieldTextEraseButtonClicked), for: .touchUpInside)
         self.addSubview(self.ynSearchTextfieldView)
         
-        self.ynSearchView = YNSearchView(frame: CGRect(x: 0, y: 64, width: width, height: height-64))
+        self.ynSearchView = YNSearchView(frame: CGRect(x: 0, y: DynamicNavigationHeight, width: width, height: height-DynamicNavigationHeight))
         self.addSubview(self.ynSearchView)
     }
     
@@ -47,19 +48,22 @@ open class SearchMainView: UIView, UITextFieldDelegate {
     }
     
     // MARK: - YNSearchTextfield
-    open func ynSearchTextfieldTextEraseButtonClicked() {
+    @objc open func ynSearchTextfieldTextEraseButtonClicked() {
         self.ynSearchTextfieldView.ynSearchTextField.text = ""
         self.ynSearchTextfieldView.textEraseButton.isHidden = true
         self.ynSearchView.ynSearchListView.ynSearchTextFieldText = ""
 
     }
     
-    open func ynSearchTextfieldcancelButtonClicked() {
+    @objc open func ynSearchTextfieldcancelButtonClicked() {
         self.ynSearchTextfieldView.ynSearchTextField.text = ""
 
         self.ynSearchTextfieldView.ynSearchTextField.endEditing(true)
         self.ynSearchView.ynSearchMainView.redrawSearchHistoryButtons()
-        self.ynSearchView.ynSearchListView.ynSearchTextFieldText = ""
+
+        if self.ynSearchView.ynSearchListView.ynSearchTextFieldText != nil {
+            self.ynSearchView.ynSearchListView.ynSearchTextFieldText = ""
+        }
 
         self.ynSearchView.ynSearchListView.isHidden = true
 //        self.ynSearchView.ynSearchListView.alpha = 0
@@ -86,10 +90,10 @@ open class SearchMainView: UIView, UITextFieldDelegate {
             
         }
     }
-    open func ynSearchTextfieldTextChanged(_ textField: UITextField) {
+    @objc open func ynSearchTextfieldTextChanged(_ textField: UITextField) {
         self.ynSearchView.ynSearchListView.ynSearchTextFieldText = textField.text
         
-        guard let textCount = textField.text?.characters.count else { return }
+        guard let textCount = textField.text?.count else { return }
         if textCount > 0 {
             self.ynSearchTextfieldView.textEraseButton.alpha = 1
             self.ynSearchTextfieldView.textEraseButton.isHidden = false
@@ -143,7 +147,7 @@ open class SearchMainView: UIView, UITextFieldDelegate {
         Log.contentview(action: "textFieldDidBeginEditing", location: self.parentViewController, id: nil)
         self.changeView()
         
-        guard let textCount = textField.text?.characters.count else { return }
+        guard let textCount = textField.text?.count else { return }
         if textCount > 0 {
             UIView.animate(withDuration: 0.3, animations: {
                 self.ynSearchTextfieldView.textEraseButton.alpha = 1

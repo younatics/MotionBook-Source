@@ -46,22 +46,22 @@ open class YNSearchMainView: UIView {
         }
     }
     
-    open func ynCategoryButtonClicked(_ sender: UIButton) {
+    @objc open func ynCategoryButtonClicked(_ sender: UIButton) {
         guard let text = ynCategoryButtons[sender.tag].categoryLabel.text else { return }
         self.delegate?.ynCategoryButtonClicked(text: text)
     }
     
-    open func ynSearchHistoryButtonClicked(_ sender: UIButton) {
+    @objc open func ynSearchHistoryButtonClicked(_ sender: UIButton) {
         guard let text = ynSearchHistoryButtons[sender.tag].textLabel.text else { return }
         self.delegate?.ynSearchHistoryButtonClicked(text: text)
     }
     
-    open func clearHistoryButtonClicked() {
+    @objc open func clearHistoryButtonClicked() {
         ynSearch.setSearchHistories(value: [String]())
         self.redrawSearchHistoryButtons()
     }
     
-    open func closeButtonClicked(_ sender: UIButton) {
+    @objc open func closeButtonClicked(_ sender: UIButton) {
         let string = ynSearchHistoryViews[sender.tag].ynSearchHistoryButton.textLabel.text
         guard let coreString = string else { return }
         ynSearch.deleteSearchHistories(value: coreString)
@@ -91,13 +91,13 @@ open class YNSearchMainView: UIView {
         }
         
         let font = UIFont.mediumSystemFont(ofSize: 11)
-        let userAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor(hexString: MainColor)]
+        let userAttributes = [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor: UIColor(hexString: MainColor)]
         
         var formerWidth: CGFloat = margin
         var formerHeight: CGFloat = 80
         
         for i in 0..<categories.count {
-            let size = categories[i].size(attributes: userAttributes)
+            let size = categories[i].size(withAttributes: userAttributes)
             if i > 0 {
                 formerWidth = ynCategoryButtons[i-1].frame.size.width + ynCategoryButtons[i-1].frame.origin.x + 5
                 if formerWidth + size.width + margin*2 > UIScreen.main.bounds.width {

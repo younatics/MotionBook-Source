@@ -1,0 +1,174 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+update_fastlane
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    cocoapods(
+      silent: true,
+      podfile: "./Podfile"
+    )
+#    ensure_git_status_clean
+
+  end
+
+# Beta Settings
+# Scheme: "motion-book"
+  lane :beta do
+
+  checkNewVersionStart = get_info_plist_value(path: "./MotionBook/Supporting Files/MotionBook-Info.plist", key: "CFBundleVersion")
+  if checkNewVersionStart == "0"
+  increment_build_number(
+      build_number: "0"
+  )
+  end
+
+  formerNumber = get_build_number
+
+  increment_build_number
+  build_number = get_build_number
+  version = get_version_number(xcodeproj: "MotionBook.xcodeproj")
+
+  formerVersion = "#{version}-b#{formerNumber}”
+  commitVersion = "#{version}-b#{build_number}”
+
+  set_info_plist_value(path: “./MotionBook/Supporting Files/MotionBook-Info.plist", key: "CFBundleVersion", value: build_number)
+
+  cert(
+    development: true,
+    output_path: "fastlane/certificate"
+    )
+
+  sigh(
+    development: true,
+    force: true,
+    output_path: "fastlane/certificate"
+    )
+
+  pem(
+      output_path: "fastlane/certificate"
+    )
+
+  gym(scheme: "MotionBook”,
+      workspace: "MotionBook.xcworkspace",
+      output_directory: “fastlane/ipa/“,
+      clean: true,
+      silent: true,
+      include_bitcode: true
+      )
+
+  commitMessage = changelog_from_git_commits(
+      pretty: "- %s",
+      between: ["v#{version}/iosBeta/#{formerVersion}", "HEAD"]
+      )
+
+  crashlytics(
+      groups: "Testers",
+      notifications: true,
+      notes: "MotionBook\n#{commitMessage}",
+      ipa_path: "./fastlane/ipa/motion-book.ipa",
+      api_token: "b1501ab7a1d73d482a30cb8a41f266ba81000ac4",
+      build_secret: "4761c0d11bc616115f5d9c6aeecbb5a2d822baf2aa231cb5f0603226a76c9f62"
+      )
+
+  commit_version_bump(
+      message: “Version #{commitVersion}”
+      )
+
+  add_git_tag(
+      grouping: “v#{version}”,
+      build_number: commitVersion
+      )
+
+  push_to_git_remote
+  end
+
+# Release Settings
+
+  lane :release do
+
+  checkNewVersionStart = get_info_plist_value(path: "./MotionBook/Supporting Files/MotionBook-Info.plist", key: "CFBundleVersion")
+  if checkNewVersionStart == "0"
+  increment_build_number(
+      build_number: "0"
+  )
+  end
+
+    formerNumber = get_build_number
+
+    increment_build_number
+    build_number = get_build_number
+    version = get_version_number(xcodeproj: "MotionBook.xcodeproj")
+
+    formerVersion = "#{version}-b#{formerNumber}”
+    commitVersion = "#{version}-b#{build_number}”
+
+    set_info_plist_value(path: “./MotionBook/Supporting Files/MotionBook-Info.plist", key: "CFBundleVersion", value: build_number)
+
+    commitMessage = changelog_from_git_commits(
+        pretty: "- %s",
+        between: ["v#{version}/iosRelease/#{formerVersion}", "HEAD"]
+        )
+
+    cert(
+      development: false,
+      output_path: "fastlane/certificate"
+      )
+
+    sigh(
+      development: false,
+      force: true,
+      output_path: "fastlane/certificate"
+      )
+
+    gym(
+        scheme: "MotionBook”,
+        workspace: "MotionBook.xcworkspace",
+        output_directory: “fastlane/ipa/“,
+        clean: true,
+        silent: true,
+        include_bitcode: true
+        )
+
+    testflight(
+        changelog: "MotionBook\n#{commitMessage}",
+        skip_waiting_for_build_processing: true
+    )
+
+   	commit_version_bump(
+      message: “Version #{commitVersion}”
+   )
+
+    add_git_tag(
+      grouping: “v#{version}”,
+      build_number: commitVersion
+    )
+    push_to_git_remote
+
+  end
+end
+    #testflight(
+    #    distribute_external: true,
+    #    changelog: "MotionBook\n#{commitMessage}",
+    #    beta_app_description: "MotionBook\n#{commitMessage}",
+    #    distribute_external: true,
+    #    beta_app_feedback_email: "younatics@gmail.com",
+    #    groups: "Motion Book Tester"
+    #)
+# cert: valid certificate and its private key installed on the local machine
+# sigh: valid provisioning profile installed locally, that matches the installed certificate
+# pem: 푸시 인증서가 2주간 유효한지 검증
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer

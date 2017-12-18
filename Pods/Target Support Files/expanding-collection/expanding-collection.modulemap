@@ -1,0 +1,6 @@
+framework module expanding_collection {
+  umbrella header "expanding-collection-umbrella.h"
+
+  export *
+  module * { export * }
+}

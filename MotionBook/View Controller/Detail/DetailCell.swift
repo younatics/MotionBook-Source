@@ -60,6 +60,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
     var authorAdditionalLabel: UILabel!
     
     var seperator5: UIView!
+    var seperator4: UIView!
     var actIndicator: UIActivityIndicatorView!
 
     override init(frame: CGRect) {
@@ -89,13 +90,13 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
-    func backButtonClicked() {
+    @objc func backButtonClicked() {
         self.backButton.imageView!.playBounceAnimation()
         self.popAction()
         
     }
     
-    func shareButtonClicked() {
+    @objc func shareButtonClicked() {
         self.shareButton.imageView!.playBounceAnimation()
 
         self.actIndicator.startAnimating()
@@ -116,7 +117,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
-    func bookmarkButtonClicked() {
+    @objc func bookmarkButtonClicked() {
         if let title = data?.title {
             Log.contentview(action: "bookmarkButtonClicked", location: self.parentViewController, id: "\(title)")
             let realm = try! Realm()
@@ -128,6 +129,12 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
                     realm.create(LibraryDataModel.self, value: ["title": title, "favorite": false], update: true)
                 }
             } else {
+                let libdata = LibraryData()
+                if libdata.getAllFavortieData().count > 2 && !settings.getIsFirstToShowReviewPopup() {
+                    ReviewController.show()
+                    settings.setIsFirstToShowReviewPopup(value: true)
+                }
+
                 try! realm.write {
                     realm.create(LibraryDataModel.self, value: ["title": title, "favorite": true], update: true)
                 }
@@ -138,7 +145,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
-    func exampleButtonClicked() {
+    @objc func exampleButtonClicked() {
         Log.addToCart(price: 0.99, action: "exampleButtonClicked", location: self.parentViewController, id: data?.title)
         
         if settings.getInappPurchased() {
@@ -161,7 +168,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
-    func githubButtonClicked() {
+    @objc func githubButtonClicked() {
         if let url = data?.gitUrl, let vc = self.parentViewController {
             MBSafariViewController.show(viewController: vc, url: url, type: .push)
         } else {
@@ -169,7 +176,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
-    func authorButtonClicked() {
+    @objc func authorButtonClicked() {
         if let author = data?.author, let vc = self.parentViewController {
             MBSafariViewController.show(viewController: vc, url: "https://github.com/\(author)", type: .push)
         } else {
@@ -236,7 +243,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
             paragraphStyle.lineHeightMultiple = 1.3
             
             let attrString = NSMutableAttributedString(string: description)
-            attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+            attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
             
             self.descriptionLabel.attributedText = attrString
             self.descriptionLabel.sizeToFit()
@@ -295,13 +302,13 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
                 paragraphStyle.lineHeightMultiple = 1.3
                 
                 let attrString = NSMutableAttributedString(string: bio)
-                attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
                 
                 self.authorBio.attributedText = attrString
                 self.authorBio.sizeToFit()
             }
             
-            let additionalColor = UIColor(colorLiteralRed: 225/255, green: 228/255, blue: 231/255, alpha: 1)
+            let additionalColor = UIColor(red: 225/255, green: 228/255, blue: 231/255, alpha: 1)
             
             var finalString = NSMutableAttributedString()
             
@@ -347,7 +354,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         
         self.navigationBar.snp.makeConstraints { (m) in
             m.left.right.top.equalTo(self)
-            m.height.equalTo(64)
+            m.height.equalTo(DynamicNavigationHeight)
         }
         
         self.backButton = UIButton()
@@ -439,7 +446,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         self.descriptionLabel = UILabel()
         self.descriptionLabel.textColor = UIColor(hexString: "5C6774")
         self.descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        self.descriptionLabel.numberOfLines = 7
+        self.descriptionLabel.numberOfLines = 20
         self.containerView.addSubview(self.descriptionLabel)
         
         self.descriptionLabel.snp.makeConstraints { (m) in
@@ -509,7 +516,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
         
         let broadSeperator = UIView()
-        broadSeperator.backgroundColor = UIColor(colorLiteralRed: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        broadSeperator.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         self.containerView.addSubview(broadSeperator)
         
         broadSeperator.snp.makeConstraints { (m) in
@@ -800,7 +807,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
             m.centerY.equalTo(titleLicenseLabel)
         }
 
-        let seperator4 = UIView()
+        seperator4 = UIView()
         seperator4.backgroundColor = UIColor(hexString: E1E4E8)
         self.containerView.addSubview(seperator4)
         
@@ -811,7 +818,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         }
         
         self.authorBackgroundView = UIView()
-        self.authorBackgroundView.backgroundColor = UIColor(colorLiteralRed: 61/255, green: 68/255, blue: 77/255, alpha: 1)
+        self.authorBackgroundView.backgroundColor = UIColor(red: 61/255, green: 68/255, blue: 77/255, alpha: 1)
         self.containerView.addSubview(authorBackgroundView)
         
         let authorTitleLabel = UILabel()
@@ -903,7 +910,7 @@ class DetailCell : UICollectionViewCell, UIScrollViewDelegate {
         self.authorBackgroundView.snp.makeConstraints { (m) in
             m.left.right.equalTo(self.containerView)
             m.top.equalTo(seperator4.snp.bottom)
-            m.bottom.equalTo(self.authorAdditionalLabel.snp.bottom).offset(41.5)
+            m.bottom.equalTo(self.authorAdditionalLabel.snp.bottom).offset(500)
         }
         
         self.actIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)

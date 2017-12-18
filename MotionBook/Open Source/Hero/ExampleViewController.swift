@@ -23,19 +23,16 @@
 import UIKit
 import Hero
 
-class HEROTabBarController: UITabBarController {
+class ExampleViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.initOpenSourceView(self)
     }
-}
-
-class ExampleViewController: UITableViewController {
     
     var storyboards: [[String]] = [
         [],
-        ["Basic", "MusicPlayer", "Menu", "BuiltInTransitions"],
+        ["Basic", "Navigation", "MusicPlayer", "Menu", "BuiltInTransitions"],
         ["CityGuide", "ImageViewer", "VideoPlayer"],
         ["AppleHomePage", "ListToGrid", "ImageGallery"]
     ]

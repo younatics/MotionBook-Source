@@ -82,4 +82,14 @@ class Settings: NSObject {
         guard let shortCutKey = pref.object(forKey: "ShortCutKey") as? Int else { return nil }
         return shortCutKey
     }
+    
+    func setIsFirstToShowReviewPopup(value: Bool) {
+        pref.set(value, forKey: "IsFirstToShowReviewPopup")
+    }
+    
+    func getIsFirstToShowReviewPopup() -> Bool {
+        guard let sortKey = pref.object(forKey: "IsFirstToShowReviewPopup") as? Bool else { return false }
+        return sortKey
+    }
+
 }

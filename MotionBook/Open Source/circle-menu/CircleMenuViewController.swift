@@ -13,10 +13,10 @@ import SnapKit
 extension UIColor {
     static func color(_ red: Int, green: Int, blue: Int, alpha: Float) -> UIColor {
         return UIColor(
-            colorLiteralRed: Float(1.0) / Float(255.0) * Float(red),
-            green: Float(1.0) / Float(255.0) * Float(green),
-            blue: Float(1.0) / Float(255.0) * Float(blue),
-            alpha: alpha)
+            red: CGFloat(Float(1.0) / Float(255.0) * Float(red)),
+            green: CGFloat(Float(1.0) / Float(255.0) * Float(green)),
+            blue: CGFloat(Float(1.0) / Float(255.0) * Float(blue)),
+            alpha: CGFloat(alpha))
     }
 }
 
@@ -54,7 +54,7 @@ class CircleMenuViewController: UIViewController, CircleMenuDelegate {
         
         let highlightedImage  = UIImage(named: items[atIndex].icon)?.withRenderingMode(.alwaysTemplate)
         button.setImage(highlightedImage, for: .highlighted)
-        button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+        button.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
     }
     
     func circleMenu(_ circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {

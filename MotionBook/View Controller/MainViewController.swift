@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import FLAnimatedImage
 import RealmSwift
+import Device
 
 class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallViewControllerProtocol, MainHeaderViewDelegate, YNTransitionProtocol, MainDelegate {
     let delegateHolder = NavigationControllerDelegate()
@@ -21,7 +22,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
     let width = UIScreen.main.bounds.size.width
     let height = UIScreen.main.bounds.size.height
     
-    var mainView: NTWaterfallView!
+    var mainView: MainCollectionView!
     var searchView: SearchExtraMainView!
     var bookmarkView: BookmarkView!
     var settingView: SettingView!
@@ -39,7 +40,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         super.viewDidLoad()
         
         self.navigationController?.delegate = delegateHolder
-        self.view.backgroundColor = UIColor(colorLiteralRed: 251/255, green: 251/255, blue: 251/255, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 251/255, green: 251/255, blue: 251/255, alpha: 1)
         
         let didEnterForground = Notification.Name("did-enter-foreground")
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.didEnterForground), name: didEnterForground, object: nil)
@@ -85,7 +86,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         self.tabBarClickedMotion(tag: tag)
     }
     
-    func didEnterForground() {
+    @objc func didEnterForground() {
         guard let tag = settings.getShortCutKey() else { return }
         self.dismiss(animated: true, completion: nil)
         self.navigationController?.popToRootViewControllerWithHandler(completion: {
@@ -232,7 +233,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         settings.removeShorCutKey()
     }
     
-    func tabBarClicked(_ sender: UIButton) {
+    @objc func tabBarClicked(_ sender: UIButton) {
         self.tabBarClickedMotion(tag: sender.tag - 101)
     }
     
@@ -306,7 +307,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
 
     }
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
@@ -328,7 +329,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
     func initView() {
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.mainView = NTWaterfallView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        self.mainView = MainCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         self.mainView.headerView.delegate = self
         self.view.addSubview(self.mainView)
         
@@ -360,18 +361,18 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         
         self.settingView = SettingView()
         self.settingView.isHidden = true
-        self.settingView.refreshDataAction = { Void in
+        self.settingView.refreshDataAction = { () in
             let visibleCells = self.mainView.collectionView.indexPathsForVisibleItems
             
             for visibleCell in visibleCells {
-                if let cell = self.mainView.collectionView.cellForItem(at: visibleCell) as? NTWaterfallViewCell{
+                if let cell = self.mainView.collectionView.cellForItem(at: visibleCell) as? MainCollectionViewCell {
                     cell.gifView.animatedImage = nil
                 }
             }
             
             if let visibleCells = self.searchView.ynSearchView.ynSearchListView.indexPathsForVisibleRows {
                 for visibleCell in visibleCells {
-                    if let cell = self.searchView.ynSearchView.ynSearchListView.cellForRow(at: visibleCell) as? SearchViewCell{
+                    if let cell = self.searchView.ynSearchView.ynSearchListView.cellForRow(at: visibleCell) as? SearchViewCell {
                         cell.gifView.animatedImage = nil
                     }
                 }
@@ -379,7 +380,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
             
             if let visibleCells = self.bookmarkView.tableView.indexPathsForVisibleRows {
                 for visibleCell in visibleCells {
-                    if let cell = self.searchView.ynSearchView.ynSearchListView.cellForRow(at: visibleCell) as? SearchViewCell{
+                    if let cell = self.searchView.ynSearchView.ynSearchListView.cellForRow(at: visibleCell) as? SearchViewCell {
                         cell.gifView.animatedImage = nil
                     }
                 }
@@ -398,7 +399,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         
         bottomTabView.snp.makeConstraints { (m) in
             m.left.right.bottom.equalTo(self.view)
-            m.height.equalTo(50)
+            m.height.equalTo(DynamicBottomHeight)
         }
         
         let bottomLine = UIView()
@@ -422,7 +423,8 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         
         bottomButton1.snp.makeConstraints { (m) in
             m.width.equalTo(width/4)
-            m.top.left.height.equalTo(bottomTabView)
+            m.height.equalTo(50)
+            m.top.left.equalTo(bottomTabView)
         }
         
         bottomButton2 = UIButton()
@@ -436,7 +438,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         
         bottomButton2.snp.makeConstraints { (m) in
             m.left.equalTo(bottomButton1.snp.right)
-            m.top.height.equalTo(bottomTabView)
+            m.top.height.equalTo(bottomButton1)
             m.width.equalTo(width/4)
         }
         
@@ -451,7 +453,7 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         
         bottomButton3.snp.makeConstraints { (m) in
             m.left.equalTo(bottomButton2.snp.right)
-            m.top.height.equalTo(bottomTabView)
+            m.top.height.equalTo(bottomButton1)
             m.width.equalTo(width/4)
         }
         
@@ -465,7 +467,8 @@ class MainViewController: BaseViewController, NTTransitionProtocol, NTWaterFallV
         self.view.addSubview(bottomButton4)
         
         bottomButton4.snp.makeConstraints { (m) in
-            m.right.height.top.equalTo(bottomTabView)
+            m.right.top.equalTo(bottomTabView)
+            m.height.equalTo(bottomButton1)
             m.width.equalTo(width/4)
         }
         

@@ -1,0 +1,6 @@
+framework module RQShineLabel {
+  umbrella header "RQShineLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}

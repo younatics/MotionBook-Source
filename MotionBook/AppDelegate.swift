@@ -14,6 +14,7 @@ import Firebase
 import FirebaseMessaging
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -39,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settings.setOpenSourceIntroViewShown(value: false)
         FirebaseOptions.defaultOptions()?.deepLinkURLScheme = "motionbook"
         
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         self.completeIAPTransactions()
         self.registerPush(application: application)
@@ -108,8 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return true
                 }
             }
+        } else {
+//            Toast.showToast(title: "Library not found", subtitle: "Please refresh all data in Setting tab")
         }
-        Toast.showToast(title: "Library not found", subtitle: "Please refresh all data in Setting tab")
         return false
     }
     

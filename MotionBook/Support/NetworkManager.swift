@@ -33,8 +33,6 @@ extension JSON {
 
 class NetworkManager: NSObject {
     static let shared: NetworkManager = NetworkManager()
-    let user = "younatics"
-    let token = "b908fde1073fb488eeee32b9213c0542b410876a"
     
     func deepLinkUrl(title:String, description:String, url: String, gitUrl: String, completion: @escaping (_ url: String?) -> Void) {
         let androidInfo = [
@@ -79,7 +77,7 @@ class NetworkManager: NSObject {
             "suffix": suffix
         ]
         
-        Alamofire.request("https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyCGeRtK_9FbJBYsFh3NdU_BgTcJv0EJyx4", method: .post, parameters: fullParams, encoding: JSONEncoding.default)
+        Alamofire.request("https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(Key.firbaseKey)", method: .post, parameters: fullParams, encoding: JSONEncoding.default)
         .responseJSON { (response) in
             if response.error != nil {
                 completion(nil)
@@ -114,7 +112,8 @@ class NetworkManager: NSObject {
     }
 
     func downloadImage(title: String, url: URL, completion: @escaping (_ error: String?) -> Void) {
-        ODRManager.shared.requestDataWith(tag: title, onSuccess: {
+        let odrManager = ODRManager.shared
+        odrManager.requestDataWith(tag: title, onSuccess: {
             
             if let bundlePath = Bundle.main.path(forResource: title, ofType: "gif") {
                 do {
@@ -167,6 +166,8 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author, let title = gitArray[i].title {
                 let gitUrl = "\(author)/\(title)"
                 
+                let user = Key.gitHubId
+                let token = Key.githubToken
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]
@@ -213,6 +214,8 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author {
                 let userUrl = "\(author)"
                 
+                let user = Key.gitHubId
+                let token = Key.githubToken
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]
@@ -257,6 +260,8 @@ class NetworkManager: NSObject {
             if let author = gitArray[i].author, let title = gitArray[i].title {
                 let gitUrl = "\(author)/\(title)"
                 
+                let user = Key.gitHubId
+                let token = Key.githubToken
                 let credentialData = "\(user):\(token)".data(using: String.Encoding.utf8)!
                 let base64Credentials = credentialData.base64EncodedString(options: [])
                 let headers = ["Authorization": "Basic \(base64Credentials)"]

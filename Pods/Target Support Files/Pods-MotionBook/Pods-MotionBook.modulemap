@@ -1,0 +1,6 @@
+framework module Pods_MotionBook {
+  umbrella header "Pods-MotionBook-umbrella.h"
+
+  export *
+  module * { export * }
+}

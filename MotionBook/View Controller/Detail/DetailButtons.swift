@@ -120,7 +120,7 @@ class DetailExampleButton: UIButton {
             self.layer.borderColor = UIColor(hexString: E1E4E8).cgColor
             self.exampleLabel.textColor = UIColor(hexString: E1E4E8)
             self.exampleLabel.text = "Example"
-            self.backgroundColor = UIColor(colorLiteralRed: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+            self.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
             self.isEnabled = false
             
         case .explainNormal:

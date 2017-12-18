@@ -43,7 +43,7 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func initOpenSourceView(_ vc: UIViewController) {
+    @objc func initOpenSourceView(_ vc: UIViewController) {
         let settings = Settings()
         let window = UIApplication.shared.keyWindow
 
@@ -68,7 +68,7 @@ extension UIViewController {
         window?.addSubview(self.openSourceView)
     }
     
-    func doubleTapped() {
+    @objc func doubleTapped() {
         let window = UIApplication.shared.keyWindow
         window?.bringSubview(toFront: self.openSourceView)
         self.openSourceView.show()
@@ -133,7 +133,7 @@ class OpenSourceView: UIView {
         })
     }
     
-    func tapped() {
+    @objc func tapped() {
         self.hide()
     }
     
@@ -179,7 +179,7 @@ class OpenSourceView: UIView {
         
     }
     
-    func backTapped() {
+    @objc func backTapped() {
         guard let vc = self.parentVC else { return }
         vc.navigationController?.popViewController(animated: true)
         self.removeFromSuperview()
@@ -206,7 +206,7 @@ class OpenSourceIntroView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func gotItButtonClicked() {
+    @objc func gotItButtonClicked() {
         self.removeFromSuperview()
     }
     
@@ -235,7 +235,7 @@ class OpenSourceIntroView: UIView {
 
         let titleLabel = UILabel()
         titleLabel.font = UIFont.semiboldSystemFont(ofSize: 21)
-        titleLabel.textColor = UIColor(colorLiteralRed: 61/255, green: 69/255, blue: 77/255, alpha: 1)
+        titleLabel.textColor = UIColor(red: 61/255, green: 69/255, blue: 77/255, alpha: 1)
         titleLabel.text = "Double finger Tap"
         mainView.addSubview(titleLabel)
         
@@ -254,7 +254,7 @@ class OpenSourceIntroView: UIView {
         paragraphStyle.alignment = .center
         
         let attrString = NSMutableAttributedString(string: "Tap to access the main menu and go back")
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         
         subLabel.attributedText = attrString
         subLabel.sizeToFit()

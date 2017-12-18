@@ -1,0 +1,6 @@
+framework module PickColor {
+  umbrella header "PickColor-umbrella.h"
+
+  export *
+  module * { export * }
+}

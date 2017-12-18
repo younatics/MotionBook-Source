@@ -57,8 +57,8 @@ extension PTDemoTableViewController {
         
         if let font = UIFont(name: "Avenir-medium" , size: 18) {
             UINavigationBar.appearance().titleTextAttributes = [
-                NSForegroundColorAttributeName : UIColor.white,
-                NSFontAttributeName : font
+                NSAttributedStringKey.foregroundColor : UIColor.white,
+                NSAttributedStringKey.font : font
             ]
         }
     }

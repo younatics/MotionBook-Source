@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Device
 
 let animationDuration = 0.35
 
@@ -50,8 +51,8 @@ class NTTransition : NSObject, UIViewControllerAnimatedTransitioning {
     func tableTransition(fromViewController: UIViewController, toViewController: UIViewController, transitionContext: UIViewControllerContextTransitioning, isBookmarkTransition: Bool) {
         let containerView = transitionContext.containerView
         containerView.backgroundColor = UIColor.white
-        let offsetY: CGFloat = 84
-
+        var offsetY: CGFloat = 105
+        
         if presenting {
             let toView = toViewController.view!
             containerView.addSubview(toView)
@@ -120,6 +121,7 @@ class NTTransition : NSObject, UIViewControllerAnimatedTransitioning {
                 })
             }
         } else {
+            // 들어갈 경우
             let fromView = fromViewController.view!
             let toView = toViewController.view
             
@@ -138,14 +140,18 @@ class NTTransition : NSObject, UIViewControllerAnimatedTransitioning {
             let indexPath = waterFallView.toIndexPath()
             let changedIndexPath = waterFallView.changedIndexPath()
             
+            if Device.version() == .iPhoneX {
+                offsetY = 130
+            }
+            
+
             let gridView = waterFallView.cellForRow(at: changedIndexPath) as! SearchViewCell
             let leftUpperPoint = gridView.convert(CGPoint(x: gridView.gifView.frame.origin.x, y: gridView.gifView.frame.origin.y), to: nil)
-            
+
             pageView.isHidden = true
             pageView.scrollToItem(at: indexPath, at:.centeredHorizontally, animated: false)
             
-            let offsetStatuBar : CGFloat = fromViewController.navigationController!.isNavigationBarHidden ? 0.0 :
-            statubarHeight
+            let offsetStatuBar : CGFloat = fromViewController.navigationController!.isNavigationBarHidden ? 0.0 : statubarHeight
             let snapShot = gridView.snapShotForTransition()
             let animationScale = (screenWidth-40)/(snapShot?.frame.width)!
 
@@ -188,12 +194,12 @@ class NTTransition : NSObject, UIViewControllerAnimatedTransitioning {
             waterFallView.layoutIfNeeded()
             let indexPath = pageView.fromPageIndexPath()
             
-            var gridView: NTWaterfallViewCell?
+            var gridView: MainCollectionViewCell?
             let tag = ((settings.getCategory()+1) * 10000) + indexPath.row
 
-            if let gridViewTemp = waterFallView.cellForItem(at: indexPath) as? NTWaterfallViewCell {
+            if let gridViewTemp = waterFallView.cellForItem(at: indexPath) as? MainCollectionViewCell {
                 gridView = gridViewTemp
-            } else if let gridViewTemp = waterFallView.viewWithTag(tag) as? NTWaterfallViewCell {
+            } else if let gridViewTemp = waterFallView.viewWithTag(tag) as? MainCollectionViewCell {
                 gridView = gridViewTemp
             }
             
@@ -262,8 +268,13 @@ class NTTransition : NSObject, UIViewControllerAnimatedTransitioning {
             pageView.isHidden = true
             pageView.scrollToItem(at: indexPath as IndexPath, at:.centeredHorizontally, animated: false)
             
-            let offsetY: CGFloat = 84
-            let offsetStatuBar: CGFloat = 0
+            var offsetY: CGFloat = 105
+            
+            if Device.version() == .iPhoneX {
+                offsetY = 130
+            }
+            
+            let offsetStatuBar : CGFloat = fromViewController.navigationController!.isNavigationBarHidden ? 0.0 : statubarHeight
             let snapShot = (gridView as! NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             containerView.addSubview(snapShot!)
             snapShot?.origin(leftUpperPoint)

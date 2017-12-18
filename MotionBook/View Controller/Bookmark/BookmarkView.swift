@@ -20,7 +20,7 @@ class BookmarkView: UIView, UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.pastelView = PastelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 64))
+        self.pastelView = PastelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: DynamicNavigationHeight))
         self.pastelView.animationDuration = 2.0
         self.pastelView.setColors(GradationColors)
         self.pastelView.startAnimation()
@@ -35,7 +35,7 @@ class BookmarkView: UIView, UITableViewDelegate, UITableViewDataSource {
         
         titleLabel.snp.makeConstraints { (m) in
             m.centerX.equalTo(self)
-            m.centerY.equalTo(pastelView).offset(10)
+            m.centerY.equalTo(pastelView).offset(DynamicCenterOffset)
         }
         
         self.nothingView = UIView()
@@ -46,7 +46,6 @@ class BookmarkView: UIView, UITableViewDelegate, UITableViewDataSource {
             m.left.right.bottom.equalTo(self)
             m.top.equalTo(pastelView.snp.bottom)
         }
-
         
         let nothingImageView = UIImageView(image: UIImage(named: "icBookmarkEmpty"))
         self.nothingView.addSubview(nothingImageView)
@@ -87,6 +86,10 @@ class BookmarkView: UIView, UITableViewDelegate, UITableViewDataSource {
     func reloadDataAndCheckBookMark() {
         self.tableView.reloadData()
         
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            self.startAnimatingVisibleCells()
+        }
+
         if libraryData.getAllFavortieData().count > 0 {
             self.tableView.isHidden = false
             self.nothingView.isHidden = true
@@ -100,9 +103,23 @@ class BookmarkView: UIView, UITableViewDelegate, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func startAnimatingVisibleCells() {
+        if let visibleCells = tableView.visibleCells as? [SearchViewCell] {
+            for visibleCell in visibleCells {
+                visibleCell.isCell(needAnimating: true)
+            }
+        }
+    }
+    
+    // MARK: UIScrollViewDelegate
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        startAnimatingVisibleCells()
+    }
+
+    // MARK: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewCell.ID) as! SearchViewCell
-        cell.gifView.animatedImage = nil
+        cell.isCell(needAnimating: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

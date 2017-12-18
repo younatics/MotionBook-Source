@@ -82,7 +82,7 @@ open class YNCategoryButton: UIButton {
         case .background:
             self.layer.borderColor = nil
             self.layer.borderWidth = 0
-            self.backgroundColor = UIColor.init(colorLiteralRed: 246/255, green: 246/255, blue: 246/255, alpha: 1)
+            self.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
             
         case .border:
             self.layer.borderColor = UIColor.darkGray.cgColor

@@ -1,18 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FC5F480D1D68AFA7839F952B3EE17D255A801A81",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9E0FB62641F5A15359B585F69B4B47D2CFA63C24",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "FC5F480D1D68AFA7839F952B3EE17D255A801A81" : 9223372036854775807,
-    "9E0FB62641F5A15359B585F69B4B47D2CFA63C24" : 9223372036854775807,
-    "C8AA0A399F4BF9E24D00509EBF898ED65E5582B3" : 9223372036854775807
+    "C8AA0A399F4BF9E24D00509EBF898ED65E5582B3" : 9223372036854775807,
+    "9E0FB62641F5A15359B585F69B4B47D2CFA63C24" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1B93B601-E164-4C43-A92C-0FF762118280",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "FC5F480D1D68AFA7839F952B3EE17D255A801A81" : "MotionBook-Source\/",
-    "9E0FB62641F5A15359B585F69B4B47D2CFA63C24" : "motion-book\/",
-    "C8AA0A399F4BF9E24D00509EBF898ED65E5582B3" : "MotionBook-Source\/git\/"
+    "C8AA0A399F4BF9E24D00509EBF898ED65E5582B3" : "motion-book\/git\/",
+    "9E0FB62641F5A15359B585F69B4B47D2CFA63C24" : "motion-book\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "MotionBook",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -27,11 +25,6 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/younatics\/MotionBook.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C8AA0A399F4BF9E24D00509EBF898ED65E5582B3"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/younatics\/MotionBook-Source.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FC5F480D1D68AFA7839F952B3EE17D255A801A81"
     }
   ]
 }

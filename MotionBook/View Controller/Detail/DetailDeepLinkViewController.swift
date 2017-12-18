@@ -26,7 +26,7 @@ class DetailDeepLinkViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func backButtonClicked() {
+    @objc func backButtonClicked() {
         self.dismiss(animated: true, completion: nil)
     }
 }

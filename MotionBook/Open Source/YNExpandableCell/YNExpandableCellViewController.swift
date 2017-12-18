@@ -38,11 +38,11 @@ class YNExpandableCellViewController: UIViewController, YNTableViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func expandAllButtonClicked() {
+    @objc func expandAllButtonClicked() {
         self.ynTableView.expandAll()
     }
     
-    func collapseAllButtonClicked() {
+    @objc func collapseAllButtonClicked() {
         self.ynTableView.collapseAll()
     }
     

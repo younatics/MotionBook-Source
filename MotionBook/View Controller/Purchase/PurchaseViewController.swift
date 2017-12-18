@@ -176,18 +176,6 @@ extension PurchaseViewController {
             return alertWithTitle("Not purchased", message: "This product has never been purchased")
         }
     }
-    
-    func alertForRefreshReceipt(_ result: RefreshReceiptResult) -> UIAlertController {
-        switch result {
-        case .success(let receiptData):
-            print("Receipt refresh Success: \(receiptData.base64EncodedString)")
-            return alertWithTitle("Receipt refreshed", message: "Receipt refreshed successfully")
-        case .error(let error):
-            print("Receipt refresh Failed: \(error)")
-            return alertWithTitle("Receipt refresh failed", message: "Receipt refresh failed")
-        }
-    }
-    
 }
 
 enum RegisteredPurchase: String {
@@ -232,11 +220,11 @@ class PurchaseViewController: BaseViewController {
         return .lightContent
     }
     
-    func restoreButtonClicked() {
+    @objc func restoreButtonClicked() {
         self.restorePurchases()
     }
     
-    func closeButtonClicked() {
+    @objc func closeButtonClicked() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -280,7 +268,7 @@ class PurchaseViewController: BaseViewController {
     }
     
 
-    func cheersButtonClicked(_ sender: UIButton) {
+    @objc func cheersButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 1:
             Log.checkOut(price: 9.99)
@@ -299,7 +287,7 @@ class PurchaseViewController: BaseViewController {
         }
     }
     
-    func unlockButtonClicked() {
+    @objc func unlockButtonClicked() {
         Log.checkOut(price: 0.99)
         self.purchase(unlockSuffix)
     }
@@ -418,7 +406,7 @@ class PurchaseViewController: BaseViewController {
         
         closeButton.snp.makeConstraints { (m) in
             m.left.equalTo(self.view).offset(15)
-            m.top.equalTo(self.view).offset(32)
+            m.top.equalTo(self.view).offset(DynamicPurchaseCloseButtonOffset)
             m.width.height.equalTo(30)
         }
         
@@ -448,7 +436,7 @@ class PurchaseViewController: BaseViewController {
         paragraphStyle.lineHeightMultiple = 1.2
         
         let attrString = NSMutableAttributedString(string: "Motion,\nquality and\naesthetic\nare in your hands")
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         
         mainLabel.attributedText = attrString
         self.view.addSubview(mainLabel)

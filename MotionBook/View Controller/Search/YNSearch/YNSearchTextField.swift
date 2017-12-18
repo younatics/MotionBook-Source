@@ -32,7 +32,7 @@ open class YNSearchTextField: UITextField {
         
         self.leftView = searchImageViewWrapper
         self.returnKeyType = .search
-        self.attributedPlaceholder = NSAttributedString(string: "Find, lovely motion", attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.8)])
+        self.attributedPlaceholder = NSAttributedString(string: "Find, lovely motion", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(0.8)])
         self.font = UIFont.systemFont(ofSize: 17)
         self.textColor = UIColor.white
         self.tintColor = UIColor.white
@@ -82,7 +82,7 @@ open class YNSearchTextFieldView: UIView {
 
         self.cancelButton.snp.makeConstraints { (m) in
             m.right.equalTo(self).offset(-20)
-            m.top.equalTo(self).offset(20)
+            m.top.equalTo(self).offset(DynamicOffset)
             m.bottom.equalTo(self)
             m.width.equalTo(60)
         }

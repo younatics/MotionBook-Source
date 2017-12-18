@@ -1,5 +1,4 @@
 xcuserdata/
-Pods/
 *.lock
 .idea/
 fastlane/report.xml
@@ -8,3 +7,4 @@ fastlane/test_output
 fastlane/metadata
 fastlane/ipa
 fastlane/certificate
+MotionBook/Support/Key.Swift

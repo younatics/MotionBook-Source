@@ -1,0 +1,6 @@
+framework module Pages {
+  umbrella header "Pages-umbrella.h"
+
+  export *
+  module * { export * }
+}

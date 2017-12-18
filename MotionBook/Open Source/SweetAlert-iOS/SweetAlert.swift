@@ -108,7 +108,7 @@ open class SweetAlert: UIViewController {
         // Subtitle
         if self.subTitleTextView.text.isEmpty == false {
             let subtitleString = subTitleTextView.text! as NSString
-            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:subTitleTextView.font!], context: nil)
+            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font:subTitleTextView.font!], context: nil)
             textViewHeight = ceil(rect.size.height) + 10.0
             subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
             contentView.addSubview(subTitleTextView)
@@ -118,7 +118,7 @@ open class SweetAlert: UIViewController {
         var buttonRect:[CGRect] = []
         for button in buttons {
             let string = button.title(for: UIControlState())! as NSString
-            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSFontAttributeName:button.titleLabel!.font], context:nil))
+            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSAttributedStringKey.font:button.titleLabel!.font], context:nil))
         }
         
         var totalWidth: CGFloat = 0.0
@@ -157,7 +157,7 @@ open class SweetAlert: UIViewController {
         contentView.clipsToBounds = true
     }
     
-    open func pressed(_ sender: UIButton!) {
+    @objc open func pressed(_ sender: UIButton!) {
         self.closeAlert(sender.tag)
     }
 

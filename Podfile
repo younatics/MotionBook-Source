@@ -6,14 +6,17 @@ use_frameworks!
 def shared_pods
     # Data
     pod 'RealmSwift'
-    pod 'Alamofire', '~> 4.3'
+    pod 'Alamofire'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'SwiftyStoreKit'
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
     pod 'Firebase/DynamicLinks'
-    
+    pod 'Device'
+    pod 'Carte'
+    pod 'AppUpdater'
+
     # UI
     pod 'SnapKit'
     pod 'SwiftyJSON'
@@ -30,16 +33,16 @@ def shared_pods
     pod 'Hue'
 
     # Lib Pods
-    pod 'expanding-collection', '~> 1.0.3'
-    pod 'GuillotineMenu', '~> 3.0'
+    pod 'expanding-collection'
+    pod 'GuillotineMenu'
     pod 'NVActivityIndicatorView'
-    pod 'CRToast', '~> 0.0.7'
+    pod 'CRToast'
     pod 'Hero'
     pod 'ZCAnimatedLabel'
     pod 'ChameleonFramework'
     pod 'YNDropDownMenu'
     pod 'YNExpandableCell'
-    pod 'CircleMenu', '~> 2.0.1'
+    pod 'CircleMenu'
     pod 'SideMenu'
     pod 'RAMAnimatedTabBarController'
     pod 'Pastel'
@@ -50,11 +53,16 @@ def shared_pods
     pod 'TKRubberPageControl'
     pod 'PopupDialog'
     pod 'MIBlurPopup'
-    pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+    pod 'Spring'
     pod 'RQShineLabel'
     
 end
 
 target ‘MotionBook’ do
     shared_pods
+    
+    post_install do |installer|
+        pods_dir = File.dirname(installer.pods_project.path)
+        at_exit { `ruby #{pods_dir}/Carte/Sources/Carte/carte.rb configure` }
+    end
 end

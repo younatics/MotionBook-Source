@@ -44,7 +44,7 @@ class MainHeaderView: UIView, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func sortButtonClicked() {
+    @objc func sortButtonClicked() {
         self.sortButtonOpend = !self.sortButtonOpend
         
         if sortButtonOpend {
@@ -122,7 +122,7 @@ class MainHeaderView: UIView, UIScrollViewDelegate {
         self.delegate?.categoryButtonClicked(tag)
     }
     
-    func categoryButtonClicked(_ sender: UIButton) {
+    @objc func categoryButtonClicked(_ sender: UIButton) {
         let tag = sender.tag - 1000
         self.categoryButtonClickedTag(tag: tag)
     }
@@ -145,11 +145,11 @@ class MainHeaderView: UIView, UIScrollViewDelegate {
         let types = libData.getTitles()
         
         let font = UIFont.systemFont(ofSize: 15)
-        let userAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor(hexString: GrayColor)]
+        let userAttributes = [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor: UIColor(hexString: GrayColor)]
         
         
         for i in 0..<types.count {
-            let size = types[i].size(attributes: userAttributes)
+            let size = types[i].size(withAttributes: userAttributes)
             
             let categoryButton = UIButton()
             categoryButton.setTitle(types[i], for: .normal)
@@ -263,7 +263,7 @@ class MainHeaderView: UIView, UIScrollViewDelegate {
         paragraphStyle.lineHeightMultiple = 1.0
         
         let attrString = NSMutableAttributedString(string: string)
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        attrString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         
         self.titleLabel.numberOfLines = 2
         self.titleLabel.attributedText = attrString
@@ -279,7 +279,7 @@ class MainHeaderView: UIView, UIScrollViewDelegate {
         if screenWidth <= 320 {
             self.titleLabel.snp.remakeConstraints { (m) in
                 m.left.equalTo(self).offset(20)
-                m.bottom.equalTo(self.categoryView.snp.top).offset(-15)
+                m.bottom.equalTo(self.categoryView.snp.top).offset(-20)
             }
 
         }

@@ -54,9 +54,9 @@ class ScrollingImageCell: UICollectionViewCell {
     scrollView.contentMode = .center
     scrollView.showsHorizontalScrollIndicator = false
     scrollView.showsVerticalScrollIndicator = false
-    if #available(iOS 9.0, *) {
+    #if os(tvOS)
       scrollView.panGestureRecognizer.allowedTouchTypes = [ NSNumber(value:UITouchType.indirect.rawValue) ]
-    }
+    #endif
     addSubview(scrollView)
 
     dTapGR = UITapGestureRecognizer(target: self, action: #selector(doubleTap(gr:)))
@@ -74,7 +74,7 @@ class ScrollingImageCell: UICollectionViewCell {
     return zoomRect
   }
 
-  func doubleTap(gr: UITapGestureRecognizer) {
+  @objc func doubleTap(gr: UITapGestureRecognizer) {
     if scrollView.zoomScale == 1 {
       scrollView.zoom(to: zoomRectForScale(scale: scrollView.maximumZoomScale, center: gr.location(in: gr.view)), animated: true)
     } else {

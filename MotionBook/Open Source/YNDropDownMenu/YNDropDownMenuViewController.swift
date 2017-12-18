@@ -14,7 +14,7 @@ class YNDropDownMenuViewController: UIViewController {
         super.viewDidLoad()
         
         let ZBdropDownViews = Bundle.main.loadNibNamed("DropDownViews", owner: nil, options: nil) as? [UIView]
-        let FFA409 = UIColor(colorLiteralRed: 255/255, green: 164/255, blue: 9/255, alpha: 1.0)
+        let FFA409 = UIColor(red: 255/255, green: 164/255, blue: 9/255, alpha: 1.0)
         
         if let _ZBdropDownViews = ZBdropDownViews {
             // Inherit YNDropDownView if you want to hideMenu in your dropDownViews

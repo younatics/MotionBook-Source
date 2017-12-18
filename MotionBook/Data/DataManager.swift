@@ -59,11 +59,11 @@ class DataManager: NSObject {
         return false
     }
     
-    func getArrayWithRecognizerString(originArray: [String],startRecognizerString: String, endRecognizerString: String) -> [String] {
+    func getArrayWithRecognizerString(originArray: [String], startRecognizerString: String, endRecognizerString: String) -> [String] {
         var returnArray = [String]()
         
         let originArrayCount = originArray.count - 20
-        let startRecognizerStringCount: Int = startRecognizerString.characters.count
+        let startRecognizerStringCount: Int = startRecognizerString.count
         var partOfArray = [String]()
         for i in 0..<originArrayCount {
             for chartersCount in i..<i + startRecognizerStringCount {
@@ -87,7 +87,7 @@ class DataManager: NSObject {
     }
     
     func seperateByObject(string: String, completion: @escaping () -> Void) {
-        let stringArray = string.characters.map { String($0) }
+        let stringArray = string.map { String($0) }
         
         let titleArray = self.getArrayWithRecognizerString(originArray: stringArray, startRecognizerString: "#### `", endRecognizerString: "`")
         let authorArray = self.getArrayWithRecognizerString(originArray: stringArray, startRecognizerString: "- Author: ", endRecognizerString: "\n")
@@ -102,7 +102,7 @@ class DataManager: NSObject {
         for i in 0..<titleArray.count {
             if let cocoaBool = cocoapodsArray[i].toBool(), let carthageBool = carthageArray[i].toBool() {
                 try! realm.write {
-                    realm.create(LibraryDataModel.self, value: ["title": titleArray[i], "author": authorArray[i], "gitUrl": gitArray[i], "gifUrl": "https://raw.githubusercontent.com/younatics/motion-book-ios/master/motion-book/\(titleArray[i])/\(titleArray[i]).gif", "detail": detailArray[i], "cocoapodsInstall": cocoaBool, "carthageInstall": carthageBool, "type": typeArray[i]], update: true)
+                    realm.create(LibraryDataModel.self, value: ["title": titleArray[i], "author": authorArray[i], "gitUrl": gitArray[i], "gifUrl": "https://raw.githubusercontent.com/younatics/motion-book-ios/master/motion-book/\(titleArray[i]).gif", "detail": detailArray[i], "cocoapodsInstall": cocoaBool, "carthageInstall": carthageBool, "type": typeArray[i]], update: true)
 
                     realm.create(LibraryDataTypeModel.self, value: ["type": typeArray[i]], update: true)
                 }

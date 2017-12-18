@@ -175,7 +175,7 @@ extension PTDemoDetailViewController {
 
 extension PTDemoDetailViewController {
     
-    func backButtonHandler() {
+    @objc func backButtonHandler() {
         popViewController()
     }
 }

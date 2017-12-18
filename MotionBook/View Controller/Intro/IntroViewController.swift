@@ -14,6 +14,7 @@ import FLAnimatedImage
 import SnapKit
 import Pastel
 import LTMorphingLabel
+import Device
 
 class IntroViewController: PresentationController {
     struct BackgroundImage {
@@ -48,9 +49,17 @@ class IntroViewController: PresentationController {
     var progressBubble: UIImageView!
     var progressBar: UIView!
     var startButton: UIButton!
-
+    
     override var prefersStatusBarHidden: Bool {
-        return true
+        if Device.version() == .iPhoneX {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,8 +100,8 @@ class IntroViewController: PresentationController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center
         
-        let attributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: color,
-                          NSParagraphStyleAttributeName: paragraphStyle]
+        let attributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: color,
+                          NSAttributedStringKey.paragraphStyle: paragraphStyle]
         
         let titles = [
         "",
@@ -169,7 +178,7 @@ extension IntroViewController {
     func initProgressView() {
         window = UIApplication.shared.keyWindow
         
-        self.startButton = UIButton(frame: CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49))
+        self.startButton = UIButton(frame: CGRect(x: 0, y: screenHeight - DynamicIntroBottomOffset, width: screenWidth, height: 49))
         self.startButton.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         self.startButton.titleLabel?.font = UIFont.mediumSystemFont(ofSize: 13)
         self.startButton.setTitle("START", for: .normal)
@@ -179,12 +188,12 @@ extension IntroViewController {
         self.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         window?.addSubview(self.startButton)
 
-        self.progressView = UIView(frame: CGRect(x: 0, y: 0 , width: screenWidth, height: 4))
+        self.progressView = UIView(frame: CGRect(x: 0, y: DynamicIntroTopOffset , width: screenWidth, height: 4))
         self.progressView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         window?.addSubview(self.progressView)
         
         self.progressBar = UIView()
-        self.progressBar.backgroundColor = UIColor.white
+        self.progressBar.backgroundColor = UIColor.white.withAlphaComponent(0.85)
         self.progressView.addSubview(progressBar)
         
         self.progressBar.snp.makeConstraints { (m) in
@@ -333,7 +342,7 @@ extension IntroViewController {
         }))
     }
     
-    func startButtonClicked() {
+    @objc func startButtonClicked() {
         Log.contentview(action: "startButtonClicked", location: self, id: nil)
         
         let vc = MainViewController()
