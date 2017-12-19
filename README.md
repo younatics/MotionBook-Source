@@ -3,6 +3,7 @@
 ![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
 [![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PAKBM2K9YU6QN)
+ ![title](https://github.com/younatics/MotionBook-Source/blob/master/Images/title.png)
 
 #### Welocome to MotionBook!
 - GitHub URL: https://github.com/younatics/MotionBook
@@ -13,12 +14,6 @@ Before start, MotionBook source is complicated and little bit messy. Please help
 MotionBook is an open source based project. Because of that, I decided to open MotionBook source.
 
 Hopes this repo help someone :)
-
-## Documentation
-- [Full documentaion](https://github.com/younatics/MotionBook-Source/wiki)
-- [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
-- [Installation](https://github.com/younatics/MotionBook-Source/wiki/Installation)
-- [Basic Logic](https://github.com/younatics/MotionBook-Source/wiki/Basic-Logic)
 
 ## Contributing to MotionBook
 Contributions to MotionBook are welcomed and encouraged! Please see the [Contribution Guide](https://github.com/younatics/MotionBook-Source/wiki/Contribution-Guide)
