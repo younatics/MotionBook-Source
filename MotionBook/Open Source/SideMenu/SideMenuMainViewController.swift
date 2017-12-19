@@ -17,6 +17,12 @@ class SideMenuMainViewController: UIViewController {
     @IBOutlet fileprivate weak var shrinkFactorSlider:UISlider!
     @IBOutlet fileprivate weak var blackOutStatusBar:UISwitch!
     
+    deinit {
+        SideMenuManager.default.menuLeftNavigationController = nil
+        SideMenuManager.default.menuRightNavigationController = nil
+        SideMenuManager.default.menuEnableSwipeGestures = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +33,8 @@ class SideMenuMainViewController: UIViewController {
     }
     
     fileprivate func setupSideMenu() {
+        // Enable Swipe Gestures
+        SideMenuManager.default.menuEnableSwipeGestures = true
         // Define the menus
         SideMenuManager.default.menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as? UISideMenuNavigationController
         SideMenuManager.default.menuRightNavigationController = storyboard!.instantiateViewController(withIdentifier: "RightMenuNavigationController") as? UISideMenuNavigationController
